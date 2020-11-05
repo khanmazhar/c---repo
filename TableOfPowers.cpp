@@ -6,13 +6,13 @@ using namespace std;
 
 int main()
 {
-
     int totalNum = 0;
     char quit;
     bool to_quit = false;
     int count = 0;
     do
     {
+        //DON'T print q or Q for the first time the loop runs.
         if (count >= 1)
         {
             cout << "Enter q or Q to exit." << endl;
@@ -23,16 +23,42 @@ int main()
                 continue;
             }
         }
+        /*-------------------------------------*/
+
         cout << "Enter the number you want to calculate power upto: ";
+        cin >> totalNum;
+        //bool check = (totalNum < 1 || totalNum > 10);
+        while (cin.fail())
+        {
+            string dummy;
+            cin.clear();
+            cin >> dummy;
+            cout << "Please make sure you input a number between 1 and 10." << endl;
+            cout << "Try Again." << endl;
+            cin >> totalNum;
+        }
+
+        //Checks that the number is between 1 and 10
         do
         {
-            cin >> totalNum;
             if (totalNum < 1 || totalNum > 10)
             {
                 cout << "Please make sure you input a number between 1 and 10." << endl;
+                cin >> totalNum;
+                while (cin.fail())
+                {
+                    string dummy;
+                    cin.clear();
+                    cin >> dummy;
+                    cout << "Please make sure you input a number between 1 and 10." << endl;
+                    cout << "Try Again." << endl;
+                    cin >> totalNum;
+                }
             }
         } while (totalNum < 1 || totalNum > 10);
-        //cin >> totalNum;
+        /*-------------------------------------*/
+
+        //PRINTS THE TABLE
         cout << setw(10) << "x" << setw(10) << "x^2" << setw(10) << "x^3" << setw(10) << "x^4" << endl;
         for (int i = 1; i <= totalNum; i++)
         {
@@ -42,6 +68,7 @@ int main()
             }
             cout << endl;
         }
+        /*-------------------------------------*/
         count++;
     } while (!to_quit);
 }
