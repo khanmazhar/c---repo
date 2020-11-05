@@ -4,6 +4,8 @@
 
 using namespace std;
 
+void checkIfInputIsInvalid(int x);
+
 int main()
 {
     int totalNum = 0;
@@ -23,40 +25,20 @@ int main()
                 continue;
             }
         }
-        /*-------------------------------------*/
 
         cout << "Enter the number you want to calculate power upto: ";
         cin >> totalNum;
-        //bool check = (totalNum < 1 || totalNum > 10);
-        while (cin.fail())
-        {
-            string dummy;
-            cin.clear();
-            cin >> dummy;
-            cout << "Please make sure you input a number between 1 and 10." << endl;
-            cout << "Try Again." << endl;
-            cin >> totalNum;
-        }
+        checkIfInputIsInvalid(totalNum);
 
-        //Checks that the number is between 1 and 10
         do
         {
             if (totalNum < 1 || totalNum > 10)
             {
                 cout << "Please make sure you input a number between 1 and 10." << endl;
                 cin >> totalNum;
-                while (cin.fail())
-                {
-                    string dummy;
-                    cin.clear();
-                    cin >> dummy;
-                    cout << "Please make sure you input a number between 1 and 10." << endl;
-                    cout << "Try Again." << endl;
-                    cin >> totalNum;
-                }
+                checkIfInputIsInvalid(totalNum);
             }
         } while (totalNum < 1 || totalNum > 10);
-        /*-------------------------------------*/
 
         //PRINTS THE TABLE
         cout << setw(10) << "x" << setw(10) << "x^2" << setw(10) << "x^3" << setw(10) << "x^4" << endl;
@@ -68,7 +50,21 @@ int main()
             }
             cout << endl;
         }
-        /*-------------------------------------*/
+
         count++;
     } while (!to_quit);
+}
+
+void checkIfInputIsInvalid(int x)
+{
+
+    while (cin.fail())
+    {
+        string dummy;
+        cin.clear();
+        cin >> dummy;
+        cout << "Please make sure you input a number between 1 and 10." << endl;
+        cout << "Try Again." << endl;
+        cin >> x;
+    }
 }
